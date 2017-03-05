@@ -6,7 +6,7 @@ I was inspired listening to "[The Ultimate Game Boy Talk](https://media.ccc.de/v
 
 # Tasks
 
-- [ ] Cartridge
+- [ ] Cartridge
   - [ ] Support other cartridge types (other than 0x00h / 08h / 09h)
 - [ ] MMU
 - [ ] CPU
