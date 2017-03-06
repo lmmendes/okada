@@ -55,9 +55,9 @@ class MMU
       memory[i - 0x2000] # mirror 0xC000 - 0xE000 = 0x2000
     when 0xFE00..0xFE9F # Sprite attribute table (OAM)
       memory[i]
-    when FF00..FF7F # I/O Registers
+    when 0xFF00..0xFF7F # I/O Registers
       input.read
-    when FF80..FFFE # High RAM (HRAM)
+    when 0xFF80..0xFFFE # High RAM (HRAM)
       memory[i]
     when 0xFFFF # Interrupts Enable Register
       memory[i]
