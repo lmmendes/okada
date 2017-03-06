@@ -13,9 +13,10 @@ I was inspired listening to "[The Ultimate Game Boy Talk](https://media.ccc.de/v
   - [ ] Flags
   - [ ] Opcodes
   - [ ] Interrupts
-- Input
+- [ ] Input
+- [ ] Sound
 - [ ] Video
- - [ ] "High performance" SDL / Gosu / r2d
+ - [ ] SDL / r2d
 
 ## Reference documentation
 
