@@ -47,7 +47,7 @@ class MMU
       memory[i]
     when 0xA000..0xBFFF # 8KB External RAM (In cartridge, switchable bank if any)
       cartridge[i]
-    when 0xC000..CFFF # 4KB Work RAM (WRAM) bank 0
+    when 0xC000..0xCFFF # 4KB Work RAM (WRAM) bank 0
       memory[i]
     when D000..0xDFFF # 4KB Work RAM bank 1~N (Switchable bank 1~7 in CGB mode)
       memory[i]
@@ -56,7 +56,22 @@ class MMU
     when 0xFE00..0xFE9F # Sprite attribute table (OAM)
       memory[i]
     when 0xFF00..0xFF7F # I/O Registers
-      input.read
+      # 0xFF00 - Register for reading joy pad info and determining system type
+      #           P14        P15
+      #            |          |
+      #  P10-------O-Right----O-A
+      #            |          |
+      #  P11-------O-Left-----O-B
+      #            |          |
+      #  P12-------O-Up-------O-Select
+      #            |          |
+      #  P13-------O-Down-----O-Start
+      #            |          |
+      if i == 0xFF00
+        input.read
+      else
+        0xFF
+      end
     when 0xFF80..0xFFFE # High RAM (HRAM)
       memory[i]
     when 0xFFFF # Interrupts Enable Register
@@ -74,6 +89,8 @@ class MMU
     when 0xFF46 # Direct Memory Access (DMA)
       dma_transfer(v)
       memory[i] = v
+    when 0xFF04 # Divider Register, incremented 16384 (~16779 on SGB) times a second. Writing any value sets it to $00
+      memory[i] = 0
     when 0x000..0x3FFF # 16KB ROM bank 00 (From cartridge, fixed bank )
       cartridge[i] = v
     when 0x4000..0x7FFF # 16KB ROM Bank 01~NN (From cartridge, switchable bank via MBC)
@@ -82,7 +99,7 @@ class MMU
       memory[i] = v
     when 0xA000..0xBFFF # 8KB External RAM (In cartridge, switchable bank if any)
       cartridge[i] = v
-    when 0xC000..CFFF # 4KB Work RAM (WRAM) bank 0
+    when 0xC000..0xCFFF # 4KB Work RAM (WRAM) bank 0
       memory[i] = v
     when D000..0xDFFF # 4KB Work RAM bank 1~N (Switchable bank 1~7 in CGB mode)
       memory[i] = v
