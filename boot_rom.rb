@@ -8,11 +8,10 @@
 # - This image is then scrolled until it is in the middle of the screen.
 # - Two musical notes are then played on the internal speaker.
 #
-# Again, the cartridge locations $104 to $133 are read but this time they are compared with a table in the internal rom. If any byte fails to compare, then the GameBoy stops comparing bytes and simply halts all operations. If all locations compare the same, then the GameBoy starts adding all of the bytes in the cartridge from $134 to $14d. A value of 25 decimal is added to this total. If the least significant byte of the result is a not a zero, then the GameBoy will stop doing anything. If it is a zero, then the internal ROM is disabled and cartridge program execution begins at location $100 with the following register values:
 class BootROM
 
-  # File
-  # http://www.neviksti.com/DMG/DMG_ROM.bin
+  # Extracted from http://www.neviksti.com/DMG/DMG_ROM.bin
+  # using "Hex Fiend" for MacOS
   ROM = [
     0x31,  0xFE,  0xFF,  0xAF,  0x21,  0xFF,  0x9F,  0x32,  0xCB,  0x7C,
     0x20,  0xFB,  0x21,  0x26,  0xFF,  0x0E,  0x11,  0x3E,  0x80,  0x32,
