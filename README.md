@@ -20,6 +20,7 @@ I was inspired listening to "[The Ultimate Game Boy Talk](https://media.ccc.de/v
 
 ## Reference documentation
 
+- http://gameboy.mongenel.com/dmg/lesson1.html
 - http://gbdev.gg8.se/files/
 - https://media.ccc.de/v/33c3-8029-the_ultimate_game_boy_talk
 - http://gbdev.gg8.se/wiki/articles/The_Cartridge_Header#014D_-_Header_Checksum
@@ -38,6 +39,7 @@ I was inspired listening to "[The Ultimate Game Boy Talk](https://media.ccc.de/v
 - https://www.scribd.com/doc/94546/Study-of-the-techniques-for-emulation-programming-by-Victor-Moya-del-Barrio
 - http://gbdev.gg8.se/wiki/articles/Memory_Map
 - http://www.codeslinger.co.uk/pages/projects/gameboy/dma.html
+- http://www.hardwarebook.info/Game_Boy_Link
 
 ## Contributing
 
