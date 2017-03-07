@@ -144,6 +144,7 @@ class MMU
   #
   def dma_transfer(byte)
     addr = byte << 8
+    i = 0
     while i < 0xA0 do
       write_byte 0xFE00 + i, read_byte(addr + i)
       i += 1
