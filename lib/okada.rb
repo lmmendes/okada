@@ -1,5 +1,5 @@
-require "okada/version"
+require 'okada/version'
+require 'okada/mmu'
 
 module Okada
-  # Your code goes here...
 end
