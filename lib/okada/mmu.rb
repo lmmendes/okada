@@ -82,7 +82,7 @@ module Okada
       end
     end
 
-    def [](i, v)
+    def [](i, v, options = {})
       raise MemoryOutOfBounds, "#{i}" if i >= MEMORY_SIZE || i < 0
       case i
       when 0xFF00
@@ -113,11 +113,12 @@ module Okada
       end
     end
 
-    alias_method :read_byte, :[]
-    alias_method :write_byte, :[]=
+    # alias_method :write_byte, :[]=
+    # alias_method :read_byte, :[]
 
     def read_word(addr)
-      self[addr] | (self[addr + 1] << 8)
+      # self[addr] | (self[addr + 1] << 8)
+      read_byte(addr) | (read_byte(addr + 1) << 8)
     end
 
     def write_word(addr, word)
