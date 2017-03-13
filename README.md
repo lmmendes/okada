@@ -1,4 +1,4 @@
-# Okada
+# Okada [![Build Status](https://travis-ci.org/lmmendes/okada.svg?branch=master)](https://travis-ci.org/lmmendes/okada)
 
 Okada is an experiment in progress to try to implement a Game Boy emulator in Ruby.
 
