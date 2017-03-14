@@ -57,4 +57,11 @@ describe Okada::MMU do
       expect(subject.read_byte(0xFF04)).to eq(0x00)
     end
   end
+
+  describe 'Mirror of C000~DDFF' do
+    it 'reading 0xE000-0xFDFF shaddow of C000-DDFF' do
+      subject.write_byte(0xC000, 0x33)
+      expect(subject.read_byte(0xE000)).to eq(0x33)
+    end
+  end
 end
