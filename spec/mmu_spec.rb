@@ -42,4 +42,12 @@ describe Okada::MMU do
       expect(subject[0x8041]).to eq(0x37)
     end
   end
+
+  describe '#read_word' do
+    it 'reads two bytes 0x8180 in 0x8080' do
+      subject[0x8080] = 0x80
+      subject[0x8081] = 0x81
+      expect(subject.read_word(0x8080)).to eq(0x8180)
+    end
+  end
 end
