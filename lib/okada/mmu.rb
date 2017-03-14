@@ -71,7 +71,7 @@ module Okada
         if i == 0xFF00
           input.read
         else
-          0xFF
+          memory[i]
         end
       when 0xFF80..0xFFFE # High RAM (HRAM)
         memory[i]

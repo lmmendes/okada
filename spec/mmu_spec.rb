@@ -50,4 +50,11 @@ describe Okada::MMU do
       expect(subject.read_word(0x8080)).to eq(0x8180)
     end
   end
+
+  describe 'Divider Register (0xFF04)' do
+    it 'writing to 0xFF04 always retuns 0' do
+      subject.write_byte(0xFF04, 0x80)
+      expect(subject.read_byte(0xFF04)).to eq(0x00)
+    end
+  end
 end
