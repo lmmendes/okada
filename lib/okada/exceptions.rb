@@ -1,4 +1,6 @@
 module Okada
-  class MemoryOutOfBounds < StandardError; end
-  class UnsupportedCartridgeType < StandardError; end;
+  module Exceptions
+    class OutOfBoundsError < StandardError; end
+    class UnsupportedCartridge < StandardError; end;
+  end
 end

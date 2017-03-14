@@ -33,14 +33,14 @@ module Okada
     attr_accessor :cartridge
     attr_accessor :input
 
-    def initializer
+    def initialize
       @memory = Array.new MEMORY_SIZE, 0
     end
 
     def [](i)
-      raise MemoryOutOfBounds, "#{i}" if i >= MEMORY_SIZE || i < 0
+      raise Exceptions::OutOfBoundsError, "#{i}" if i >= MEMORY_SIZE || i < 0
       case i
-      when 0x000..0x3FFF # 16KB ROM bank 00 (From cartridge, fixed bank )
+      when 0x0000..0x3FFF # 16KB ROM bank 00 (From cartridge, fixed bank )
         cartridge[i]
       when 0x4000..0x7FFF # 16KB ROM Bank 01~NN (From cartridge, switchable bank via MBC)
         cartridge[i]
@@ -50,7 +50,7 @@ module Okada
         cartridge[i]
       when 0xC000..0xCFFF # 4KB Work RAM (WRAM) bank 0
         memory[i]
-      when D000..0xDFFF # 4KB Work RAM bank 1~N (Switchable bank 1~7 in CGB mode)
+      when 0xD000..0xDFFF # 4KB Work RAM bank 1~N (Switchable bank 1~7 in CGB mode)
         memory[i]
       when 0xE000..0xFDFF # Mirror of C000~DDFF (ECHO) (Typically not used)
         memory[i - 0x2000] # mirror 0xC000 - 0xE000 = 0x2000
@@ -78,12 +78,12 @@ module Okada
       when 0xFFFF # Interrupts Enable Register
         memory[i]
       else
-        raise MemoryOutOfBounds, "Memory address #{i} not implemented"
+        raise Exceptions::OutOfBoundsError, "Memory address #{i} not implemented"
       end
     end
 
-    def [](i, v, options = {})
-      raise MemoryOutOfBounds, "#{i}" if i >= MEMORY_SIZE || i < 0
+    def []=(i, v, options = {})
+      raise Exceptions::OutOfBoundsError, "#{i}" if i >= MEMORY_SIZE || i < 0
       case i
       when 0xFF00
         memory[i] = v | 0xF
@@ -91,8 +91,8 @@ module Okada
         dma_transfer(v)
         memory[i] = v
       when 0xFF04 # Divider Register, incremented 16384 (~16779 on SGB) times a second. Writing any value sets it to $00
-        memory[i] = 0
-      when 0x000..0x3FFF # 16KB ROM bank 00 (From cartridge, fixed bank )
+        memory[i] = 0x00
+      when 0x0000..0x3FFF # 16KB ROM bank 00 (From cartridge, fixed bank )
         cartridge[i] = v
       when 0x4000..0x7FFF # 16KB ROM Bank 01~NN (From cartridge, switchable bank via MBC)
         cartridge[i] = v
@@ -102,23 +102,22 @@ module Okada
         cartridge[i] = v
       when 0xC000..0xCFFF # 4KB Work RAM (WRAM) bank 0
         memory[i] = v
-      when D000..0xDFFF # 4KB Work RAM bank 1~N (Switchable bank 1~7 in CGB mode)
+      when 0xD000..0xDFFF # 4KB Work RAM bank 1~N (Switchable bank 1~7 in CGB mode)
         memory[i] = v
       when 0xE000..0xFDFF # Mirror of C000~DDFF (ECHO) (Typically not used)
         memory[i - 0x2000] = v
       when 0xFE00..0xFE9F # Sprite attribute table (OAM)
         memory[i] = v
       else
-        raise MemoryOutOfBounds, "Memory address #{i}=#{v} not implemented"
+        raise Exceptions::OutOfBoundsError, "Memory address #{i}=#{v} not implemented"
       end
     end
 
-    # alias_method :write_byte, :[]=
-    # alias_method :read_byte, :[]
+    alias_method :write_byte, :[]=
+    alias_method :read_byte, :[]
 
     def read_word(addr)
-      # self[addr] | (self[addr + 1] << 8)
-      read_byte(addr) | (read_byte(addr + 1) << 8)
+      self[addr] | (self[addr + 1] << 8)
     end
 
     def write_word(addr, word)
