@@ -84,6 +84,11 @@ module Okada
 
     def []=(i, v, options = {})
       raise Exceptions::OutOfBoundsError, "#{i}" if i >= MEMORY_SIZE || i < 0
+
+      if options[:hw]
+        return memory[i] = v
+      end
+
       case i
       when 0xFF00
         memory[i] = v | 0xF
@@ -107,6 +112,8 @@ module Okada
       when 0xE000..0xFDFF # Mirror of C000~DDFF (ECHO) (Typically not used)
         memory[i - 0x2000] = v
       when 0xFE00..0xFE9F # Sprite attribute table (OAM)
+        memory[i] = v
+      when 0xFEA0..0xFFFF
         memory[i] = v
       else
         raise Exceptions::OutOfBoundsError, "Memory address #{i}=#{v} not implemented"
