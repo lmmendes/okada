@@ -42,6 +42,7 @@ Checkout the [Game Boy Opcodes](https://github.com/lmmendes/game-boy-opcodes) re
 - http://gbdev.gg8.se/wiki/articles/Memory_Map
 - http://www.codeslinger.co.uk/pages/projects/gameboy/dma.html
 - http://www.hardwarebook.info/Game_Boy_Link
+- https://github.com/avivace/awesome-gbdev
 
 ## Contributing
 
