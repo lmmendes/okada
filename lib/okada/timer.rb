@@ -24,7 +24,7 @@ module Okada
         else
           if mmu.read_byte(0xFF05) == 0xFF
             mmu.write_byte 0xFF05, mmu.read_byte(0xFF06)
-            # Okada::Interrupt.request(Interrupt::INTERRUPT_TIMER)
+            Okada::Interrupt.trigger(Okada::Interrupt::INTERRUPT_TIMER)
           else
             mmu.write_byte 0xFF05, mmu.read_byte(0xFF06) + 1
           end
