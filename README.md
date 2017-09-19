@@ -1,10 +1,12 @@
 # Okada [![Build Status](https://travis-ci.org/lmmendes/okada.svg?branch=master)](https://travis-ci.org/lmmendes/okada)
 
-Okada is an experiment in progress to try to implement a Game Boy emulator in Ruby.
+Okada is an *work in progress* to try to implement a Game Boy emulator in Ruby.
 
 I was inspired listening to "[The Ultimate Game Boy Talk](https://media.ccc.de/v/33c3-8029-the_ultimate_game_boy_talk)" by Michael Steil.
 
 Checkout the [Game Boy Opcodes](https://github.com/lmmendes/game-boy-opcodes) repository if you are searching for an automated way to obtain the GameBoy opcodes.
+
+NOTE: Work in progress this code doesn't run yet.
 
 # Tasks
 
